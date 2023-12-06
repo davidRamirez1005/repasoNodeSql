@@ -1,5 +1,8 @@
 const getUserQuery = /* sql */ `
-SELECT * FROM preguntas ORDER BY id DESC
+SELECT *
+FROM producto
+WHERE LENGTH(nombre) + LENGTH(precio) <= 20
+ORDER BY id DESC;
 `;
 // SELECT * FROM preguntas ORDER BY id DESC
 // SELECT * FROM ciudad WHERE nombre LIKE 'M%';
@@ -11,7 +14,7 @@ SELECT * FROM preguntas ORDER BY id DESC
 // ORDER BY id DESC;
 
 const insertUserQuery = /* sql */ `
-  INSERT INTO ciudad (nombre, id_p) VALUES (?, ?)
+  INSERT INTO producto(nombre, precio, id_fabricante) VALUES (?, ?, ?)
 `;
 
 module.exports = {
