@@ -3,7 +3,7 @@ const { getUserQuery, insertUserQuery } = require('../model/query.js');
 
 //GET
 const user = async(req, res)=>{
-  con.query(getUserQuery, (err, data, field) => {
+  con.query(getUserQuzery, (err, data, field) => {
     res.send(data)
   })
 }
@@ -34,23 +34,27 @@ const updateUserName = async (req, res) => {
     }
   });
 };
+
+
 //DELETE
-const deleteUser = async (req, res) => {
+const deleteUser = (req, res) => {
   const id = req.params.id;
 
-  if (!id) {
-    return res.status(400).send('ID es obligatorio');
-  }
+  // Verifica si el ID es un número entero válido
+  // if (!Number.isInteger(parseInt(id, 10))) {
+  //   return res.status(400).send('ID no válido');
+  // }
 
   con.query('DELETE FROM producto WHERE id = ?', [id], (err, result) => {
     if (err) {
-      return res.status(500).send('Error al eliminar usuario');
+      console.error('Error al eliminar producto:', err);
+      return res.status(500).send('Error interno del servidor');
     }
 
     if (result.affectedRows > 0) {
-      res.send('Usuario eliminado exitosamente');
+      res.send('Producto eliminado exitosamente');
     } else {
-      res.status(404).send('Usuario no encontrado');
+      res.status(404).send('Producto no encontrado');
     }
   });
 };
