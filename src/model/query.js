@@ -17,7 +17,11 @@ const insertUserQuery = /* sql */ `
   INSERT INTO producto(nombre, precio, id_fabricante) VALUES (?, ?, ?)
 `;
 
+const queryDeleteuser = `DELETE FROM producto WHERE id = ?`;
+
+
 module.exports = {
   getUserQuery,
-  insertUserQuery
+  insertUserQuery,
+  queryDeleteuser
 };
